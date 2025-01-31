@@ -12,15 +12,13 @@ import (
 //curl -v -d "Hello World" localhost:9090/...
 
 func main() {
-
-	// http.HandleFunc("/goodbye", func(http.ResponseWriter, *http.Request) {
-	// 	log.Println("Goodbye World")
-	// })
 	l := log.New(os.Stdout, "product-api", log.LstdFlags)
 	hh := handlers.NewHello(l)
+	gh := handlers.NewGoodbye(l)
 
 	sm := http.NewServeMux()
 	sm.Handle("/", hh)
+	sm.Handle("/goodbye", gh)
 
 	http.ListenAndServe(":9090", sm)
 }
