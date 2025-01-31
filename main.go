@@ -1,32 +1,26 @@
 package main
 
 import (
-	"fmt"
-	"io"
 	"log"
 	"net/http"
+	"os"
+
+	"github.com/estnafinema0/go-microservices/handlers"
 )
 
 //go run main.go
 //curl -v -d "Hello World" localhost:9090/...
 
 func main() {
-	http.HandleFunc("/", func(wr http.ResponseWriter, r *http.Request) {
-		log.Println("Hello World")
-		d, err := io.ReadAll(r.Body)
-		if err != nil {
-			http.Error(wr, "Oops", http.StatusBadRequest)
-			// wr.WriteHeader(http.StatusBadRequest)
-			// wr.Write([]byte("Oops"))
-			return
-		}
-		//log.Printf("Data %s\n", d)
-		fmt.Fprintf(wr, "Hello %s\n", d)
-	})
 
-	http.HandleFunc("/goodbye", func(http.ResponseWriter, *http.Request) {
-		log.Println("Goodbye World")
-	})
+	// http.HandleFunc("/goodbye", func(http.ResponseWriter, *http.Request) {
+	// 	log.Println("Goodbye World")
+	// })
+	l := log.New(os.Stdout, "product-api", log.LstdFlags)
+	hh := handlers.NewHello(l)
 
-	http.ListenAndServe(":9090", nil)
+	sm := http.NewServeMux()
+	sm.Handle("/", hh)
+
+	http.ListenAndServe(":9090", sm)
 }
