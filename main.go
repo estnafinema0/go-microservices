@@ -14,6 +14,15 @@ import (
 
 //go run main.go
 //curl -v -d "Hello World" localhost:9090/...
+//curl -v -d "Nice" localhost:9090 | jq
+// another method that migth not be allowed
+// curl  localhost:9090 -XDELETE -v | jq
+//POST with  json
+//curl  localhost:9090 -d '{"id":1, "name": "tea", "description": "hehe"}' | jq
+//PUT with  json
+//curl  localhost:9090/1 -XPUT | jq
+//PUT with  data
+//curl  localhost:9090/1 -XPUT -d '{"id":1, "name": "tea", "description": "hehe"}' | jq
 
 func main() {
 	l := log.New(os.Stdout, "product-api", log.LstdFlags)
