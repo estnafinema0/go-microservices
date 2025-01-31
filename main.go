@@ -7,6 +7,9 @@ import (
 	"net/http"
 )
 
+//go run main.go
+//curl -v -d "Hello World" localhost:9090/...
+
 func main() {
 	http.HandleFunc("/", func(wr http.ResponseWriter, r *http.Request) {
 		log.Println("Hello World")
