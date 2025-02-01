@@ -1,6 +1,7 @@
 module github.com/estnafinema0/go-microservices
 
 require (
+	github.com/go-openapi/runtime v0.28.0
 	github.com/go-playground/validator v9.31.0+incompatible
 	github.com/gorilla/mux v1.8.1
 	github.com/nicholasjackson/env v0.6.1
@@ -20,7 +21,6 @@ require (
 	github.com/go-openapi/jsonpointer v0.21.0 // indirect
 	github.com/go-openapi/jsonreference v0.21.0 // indirect
 	github.com/go-openapi/loads v0.22.0 // indirect
-	github.com/go-openapi/runtime v0.28.0 // indirect
 	github.com/go-openapi/spec v0.21.0 // indirect
 	github.com/go-openapi/strfmt v0.23.0 // indirect
 	github.com/go-openapi/swag v0.23.0 // indirect
