@@ -10,6 +10,7 @@ import (
 	"github.com/go-playground/validator"
 )
 
+// Product defines the structure for an API product
 type Product struct {
 	ID          int     `json:"id"`
 	Name        string  `json:"name" validate:"required"`
@@ -26,11 +27,15 @@ func (p *Product) FromJSON(r io.Reader) error {
 	return e.Decode(p)
 }
 
-type Products []*Product
+func (p *Product) Validate() error {
+	validate := validator.New()
+	validate.RegisterValidation("sku", ValidateSKU)
+	return validate.Struct(p)
+}
 
 func ValidateSKU(fl validator.FieldLevel) bool {
 	// if sku is a format of aaa-aaaa-aaaaa
-	re := regexp.MustCompile("^[a-z]+-[a-z]+-[a-z]+$")
+	re := regexp.MustCompile(`[a-z]+-[a-z]+-[a-z]+`)
 	matches := re.FindAllString(fl.Field().String(), -1)
 	if len(matches) != 1 {
 		return false
@@ -39,11 +44,8 @@ func ValidateSKU(fl validator.FieldLevel) bool {
 	return true
 }
 
-func (p *Product) Validate() error {
-	validate := validator.New()
-	validate.RegisterValidation("sku", ValidateSKU)
-	return validate.Struct(p)
-}
+// Products is a collection of Product
+type Products []*Product
 
 func (p *Products) ToJSON(w io.Writer) error {
 	e := json.NewEncoder(w)
@@ -70,8 +72,10 @@ func UpdateProduct(id int, p *Product) error {
 	if err != nil {
 		return err
 	}
+
 	p.ID = id
 	productList[pos] = p
+
 	return nil
 }
 
@@ -83,6 +87,7 @@ func findProduct(id int) (*Product, int, error) {
 			return p, i, nil
 		}
 	}
+
 	return nil, -1, ErrProductNotFound
 }
 
