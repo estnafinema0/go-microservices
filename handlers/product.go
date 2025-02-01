@@ -43,5 +43,9 @@ type productIDParameter struct {
 	ID int `json:"id"`
 }
 
+//swagger:response noContent
+type noContentResponse struct {
+}
+
 // KeyProduct is a key used for the Product object in the context
 type KeyProduct struct{}
