@@ -30,7 +30,7 @@ type Products []*Product
 
 func ValidateSKU(fl validator.FieldLevel) bool {
 	// if sku is a format of aaa-aaaa-aaaaa
-	re := regexp.MustCompile("[a-z]+-[a-z]+-[a-z]")
+	re := regexp.MustCompile("^[a-z]+-[a-z]+-[a-z]+$")
 	matches := re.FindAllString(fl.Field().String(), -1)
 	if len(matches) != 1 {
 		return false

@@ -75,9 +75,7 @@ func (p *Products) MiddlewareProductValidation(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
 		prod := &data.Product{}
 
-		// Declare err variable
-		var err error
-		err = prod.FromJSON(r.Body)
+		err := prod.FromJSON(r.Body)
 		if err != nil {
 			p.l.Println("[ERROR] deserializing product", err)
 			http.Error(rw, "Error reading product", http.StatusBadRequest)
