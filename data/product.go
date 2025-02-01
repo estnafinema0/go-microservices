@@ -1,9 +1,7 @@
 package data
 
 import (
-	"encoding/json"
 	"fmt"
-	"io"
 	"time"
 
 	"github.com/go-playground/validator"
@@ -46,13 +44,8 @@ type Product struct {
 // swagger:response productsResponces
 type productsResponceWrapper struct {
 	// All products in the system
-
+	// in: body
 	Body []Product
-}
-
-func (p *Product) FromJSON(r io.Reader) error {
-	e := json.NewDecoder(r)
-	return e.Decode(p)
 }
 
 func (p *Product) Validate() error {
@@ -63,11 +56,6 @@ func (p *Product) Validate() error {
 
 // Products is a collection of Product
 type Products []*Product
-
-func (p *Products) ToJSON(w io.Writer) error {
-	e := json.NewEncoder(w)
-	return e.Encode(p)
-}
 
 // GetProducts returns a list of products
 func GetProducts() Products {
