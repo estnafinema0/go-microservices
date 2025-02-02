@@ -8,7 +8,6 @@ import (
 
 	"github.com/estnafinema0/go-microservices/product-api/data"
 	"github.com/gorilla/mux"
-	"github.com/hashicorp/go-hclog"
 )
 
 // KeyProduct is a key used for the Product object in the context
@@ -16,7 +15,7 @@ type KeyProduct struct{}
 
 // Products handler for getting and updating products
 type Products struct {
-	l hclog.Logger
+	l *log.Logger
 	v *data.Validation
 	//productDB *data.ProductsDB
 }
