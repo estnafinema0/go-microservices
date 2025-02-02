@@ -2,10 +2,11 @@ package handlers
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 	"strconv"
 
-	"github.com/estnafinema0/go-microservices/data"
+	"github.com/estnafinema0/go-microservices/product-api/data"
 	"github.com/gorilla/mux"
 	"github.com/hashicorp/go-hclog"
 )
@@ -15,14 +16,14 @@ type KeyProduct struct{}
 
 // Products handler for getting and updating products
 type Products struct {
-	l         hclog.Logger
-	v         *data.Validation
-	productDB *data.ProductsDB
+	l hclog.Logger
+	v *data.Validation
+	//productDB *data.ProductsDB
 }
 
 // NewProducts returns a new products handler with the given logger
-func NewProducts(l hclog.Logger, v *data.Validation, pdb *data.ProductsDB) *Products {
-	return &Products{l, v, pdb}
+func NewProducts(l *log.Logger, v *data.Validation) *Products {
+	return &Products{l, v}
 }
 
 // ErrInvalidProductPath is an error message when the product path is not valid
