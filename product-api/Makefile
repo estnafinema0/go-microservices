@@ -6,3 +6,6 @@ swagger: check_install
 
 generate_client:
 	cd sdk && swagger generate client -f ../swagger.yaml -A product-api
+
+run:
+	go run main.go
