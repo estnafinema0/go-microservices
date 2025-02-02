@@ -1,4 +1,4 @@
-module github.com/estnafinema0/go-microservices
+module github.com/estnafinema0/go-microservices/product-api
 
 require (
 	github.com/PacktPublishing/Building-Microservices-with-Go-Second-Edition/product-api v0.0.0-20210121084838-e26ef75d9e1b
