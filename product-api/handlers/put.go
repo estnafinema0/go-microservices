@@ -15,7 +15,7 @@ import (
 //  404: errorResponse
 //  422: errorValidation
 
-func (p Products) UpdateProducts(rw http.ResponseWriter, r *http.Request) {
+func (p Products) Update(rw http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id, err := strconv.Atoi(vars["id"])
 	if err != nil {

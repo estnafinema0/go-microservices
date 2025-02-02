@@ -28,6 +28,7 @@ import (
 // curl  localhost:9090/1 -XPUT -d '{"id":1, "name": "tea", "description": "hehe"}' | jq
 // POST with  data
 // curl localhost:9090/1 -X POST -d '{"name": "bubble"}' | jq
+// swagger generate client -f ../product-api/swagger.yaml -A product-api
 
 var bindAddress = env.String("BIND_ADDRESS", false, ":9090", "Bind Address for the server")
 
@@ -47,7 +48,7 @@ func main() {
 	getRouter.HandleFunc("/", ph.GetProducts)
 
 	putRouter := sm.Methods(http.MethodPut).Subrouter()
-	putRouter.HandleFunc("/", ph.UpdateProducts)
+	putRouter.HandleFunc("/", ph.Update)
 	putRouter.Use(ph.MiddlewareValidateProduct)
 
 	postRouter := sm.Methods(http.MethodPost).Subrouter()

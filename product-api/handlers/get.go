@@ -19,7 +19,7 @@ func (p *Products) GetProducts(rw http.ResponseWriter, r *http.Request) {
 	lp := data.GetProducts()
 
 	// serialize the list to JSON
-	err := lp.ToJSON(rw)
+	err := data.ToJSON(lp, rw)
 	if err != nil {
 		http.Error(rw, "Unable to marshal json", http.StatusInternalServerError)
 	}

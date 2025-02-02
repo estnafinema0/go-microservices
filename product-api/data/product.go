@@ -82,6 +82,7 @@ func UpdateProduct(id int, p *Product) error {
 	return nil
 }
 
+// ErrProductNotFound is an error raised when a product can not be found in the database
 var ErrProductNotFound = fmt.Errorf("Product not found")
 
 // DeleteProduct deletes a product from the database
